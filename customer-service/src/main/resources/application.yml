@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: customer-service
+
+server:
+  port: 8085
+
+shop:
+  r2dbc:
+    host: ${DB_HOST:localhost}
+    port: ${DB_PORT:5442}
+    database: ${DB_NAME:customer_db}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    postgres:
+      application-name: customer-service
+  kafka:
+    # This service neither consumes nor publishes messages (yet): "false" switches the Kafka beans of
+    # shop-common off. Give it a bootstrap server when customer events are introduced.
+    bootstrap-servers: "false"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

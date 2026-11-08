@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Aggregator only: each module keeps its own Spring Boot parent. -->
+    <groupId>com.shop</groupId>
+    <artifactId>shop-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>shop</name>
+
+    <modules>
+        <module>common</module>
+        <module>product-service</module>
+        <module>inventory-service</module>
+        <module>payment-service</module>
+        <module>customer-service</module>
+        <module>order-service</module>
+    </modules>
+
+    <profiles>
+        <!-- mvn -Pe2e verify: needs Docker, and the service jars built first (see README) -->
+        <profile>
+            <id>e2e</id>
+            <modules>
+                <module>e2e-tests</module>
+            </modules>
+        </profile>
+    </profiles>
+</project>

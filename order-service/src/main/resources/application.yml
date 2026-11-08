@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: order-service
+
+server:
+  port: 8080
+
+shop:
+  r2dbc:
+    host: ${DB_HOST:localhost}
+    port: ${DB_PORT:5442}
+    database: ${DB_NAME:order_db}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    postgres:
+      application-name: order-service
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:29092}
+    group-id: order-service
+  order:
+    # a saga with no progress for this long is compensated or rejected by the sweeper
+    saga-timeout: 2m
+    sweep-interval: 30s
+    sweep-batch-size: 100
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: inventory-service
+
+server:
+  port: 8082
+
+shop:
+  r2dbc:
+    host: ${DB_HOST:localhost}
+    port: ${DB_PORT:5443}
+    database: ${DB_NAME:inventory_db}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    postgres:
+      application-name: inventory-service
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:29092}
+    group-id: inventory-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics

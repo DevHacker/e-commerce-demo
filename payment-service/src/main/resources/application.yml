@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: payment-service
+
+server:
+  port: 8084
+
+shop:
+  r2dbc:
+    host: ${DB_HOST:localhost}
+    port: ${DB_PORT:5444}
+    database: ${DB_NAME:payment_db}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    postgres:
+      application-name: payment-service
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:29092}
+    group-id: payment-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
